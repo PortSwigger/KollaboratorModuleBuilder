@@ -4,7 +4,9 @@
 **Kollaborator Module Builder** is a Burp Suite extension that empowers you to write your own Python script to handle collaborator interactions. The beauty of this tool is it will automatically add the interaction data to the script wherever the placeholder for data is written.
 
 ## Installation
-To install the extension, simply import the built jar file into Burp Suite.
+To install the extension, simply import the built jar file into Burp Suite professional.
+
+Also, please note that this extension utilizes the python and library installed on the device running running burp suite pro. 
 
 ## Usage
 You can write your Python script in the text area under the KMB tab. This script will be triggered once an interaction is received by the collaborator. 
