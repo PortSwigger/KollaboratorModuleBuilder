@@ -1,7 +1,7 @@
 # Kollaborator Module Builder
 
 ## Description
-**Kollaborator Module Builder** is a Burp Suite extension that empowers you to write your own Python script to handle collaborator interactions. The beauty of this tool is that collaborator interaction data will be automatically replaced in your script.
+**Kollaborator Module Builder** is a Burp Suite extension that empowers you to write your own Python script to handle collaborator interactions. The beauty of this tool is it will automatically add the interaction data to the script wherever the placeholder for data is written.
 
 ## Installation
 To install the extension, simply import the built jar file into Burp Suite.
@@ -9,7 +9,7 @@ To install the extension, simply import the built jar file into Burp Suite.
 ## Usage
 You can write your Python script in the text area under the KMB tab. This script will be triggered once an interaction is received by the collaborator. 
 
-To use interaction data in your Python script, you can add placeholders in your script. For example, in `print("__clientIp__")`, `__clientIp__` will be replaced by the interaction IP. 
+To use interaction data in your Python script, you can add placeholder for interacation data in your script. For example, in `print("__clientIp__")`, `__clientIp__` will be replaced by the interaction IP. 
 
 Here are the 20 placeholders you can use:
 
@@ -31,9 +31,9 @@ Here are the 20 placeholders you can use:
 - `__dnsQueryType__`
 - `__dnsQueryB64__`
 - `__smtpConversationB64__`
-- `__smtpProtocol__
+- `__smtpProtocol__`
 
-Please note that some of the interaction data is base64 encoded, for example __httpRequestBodyB64__,  and needs to be decoded before being used in your script.
+Please note that some of the interaction data is base64 encoded, for example `__httpRequestBodyB64__`,  and needs to be decoded before being used in your script.
 
 ## Contribution
 If you'd like to contribute to this project, please feel free to fork the repository and submit a pull request!
