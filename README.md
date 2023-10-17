@@ -47,6 +47,18 @@ Here are the 20 placeholders you can use:
 
 Please note that some of the interaction data is base64 encoded, for example `__httpRequestBodyB64__`,  and needs to be decoded before being used in your script.
 
+## Working
+
+Basic functionality of extension like polling is being used via the Burp Montoya API example. 
+Code for interaction have been edited to 
+- Read the script from text area
+- Replace placeholders with actual Data( base64 encoded in case data is not reliable).
+- Store the the script data in temp python file.
+- Use process.exec to call python and run the script file.
+- delete the file after running.
+
+Apart from that UI is added to provide user textarea and buton to copy collaborator link. 
+
 ## Contribution
 If you'd like to contribute to this project, please feel free to fork the repository and submit a pull request!
 
