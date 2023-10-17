@@ -11,6 +11,16 @@ Also, please note that this extension utilizes the python and library installed 
 ## Usage
 You can write your Python script in the text area under the KMB tab. This script will be triggered once an interaction is received by the collaborator. 
 
+##Steps
+
+- Write the python script
+- Click on "Copy Payload".
+- Make interaction with the the collaborator link copied.
+- Observe that the the python script is executed.
+
+Note: python output is being redirected to extension's output. 
+
+
 To use interaction data in your Python script, you can add placeholder for interacation data in your script. For example, in `print("__clientIp__")`, `__clientIp__` will be replaced by the interaction IP. 
 
 Here are the 20 placeholders you can use:
