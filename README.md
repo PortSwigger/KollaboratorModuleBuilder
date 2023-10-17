@@ -11,7 +11,7 @@ Also, please note that this extension utilizes the python and library installed 
 ## Usage
 You can write your Python script in the text area under the KMB tab. This script will be triggered once an interaction is received by the collaborator. 
 
-##Steps
+## Steps
 
 - Write the python script
 - Click on "Copy Payload".
