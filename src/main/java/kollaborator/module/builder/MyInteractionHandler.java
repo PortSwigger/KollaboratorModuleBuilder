@@ -128,9 +128,9 @@ public class MyInteractionHandler{
     		
     		command = command.replaceAll("__httpRequestVersion__", httpDetails.requestResponse().request().httpVersion());
     		
-    		command = command.replaceAll("__httpRequestPathB64__", httpDetails.requestResponse().request().path());
+    		command = command.replaceAll("__httpRequestPathB64__", Base64.getEncoder().encodeToString(httpDetails.requestResponse().request().path().getBytes()));
     		
-    		command = command.replaceAll("__httpRequestUrlB64__", httpDetails.requestResponse().request().url());
+    		command = command.replaceAll("__httpRequestUrlB64__", Base64.getEncoder().encodeToString(httpDetails.requestResponse().request().url().getBytes()));
     		
     		command = command.replaceAll("__httpRequestHost__", httpDetails.requestResponse().request().httpService().host());
     		
