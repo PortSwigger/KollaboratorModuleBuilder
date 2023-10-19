@@ -59,6 +59,10 @@ Code for interaction have been edited to
 
 Apart from that UI is added to provide user textarea and buton to copy collaborator link. 
 
+## Future plans
+
+- Add ability to create/manage session identifiers(assist in creating session which are created via email OTPs).
+
 ## Contribution
 If you'd like to contribute to this project, please feel free to fork the repository and submit a pull request!
 
