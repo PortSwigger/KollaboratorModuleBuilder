@@ -8,6 +8,7 @@ import burp.api.montoya.core.Registration;
 import burp.api.montoya.persistence.PersistedObject;
 import kollaborator.module.builder.poller.Poller;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -17,20 +18,29 @@ import java.awt.event.ActionListener;
 import java.time.Duration;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
 import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class KollaboratorModule implements BurpExtension{
 	
 	private MontoyaApi api;
 	private Registration tab;
-	public static JTextArea code; 
+	static JTextArea code; 
+	static JTextField timeout;
+	static JCheckBox modifyRequests;
 
 	public void initialize(MontoyaApi api) {
 		this.api = api;
 
         api.extension().setName("Kollaborator Module Builder");
+        api.http().registerHttpHandler(new MFASessionHandler(api));
         
         
 
@@ -86,7 +96,32 @@ public class KollaboratorModule implements BurpExtension{
 	
 	private Component createTab(CollaboratorClient collaboratorClient) {
 		JButton getPayload = new JButton("Copy payload!"); 
+		modifyRequests = new JCheckBox("Modify Requests");
+		timeout = new JTextField("5");
 		code = new JTextArea();
+		
+		JLabel timeoutLabel = new JLabel("    TimeOut (in seconds) ");
+		timeoutLabel.setLabelFor(timeout);
+		
+		JPanel time = new JPanel(new BorderLayout());
+		
+		time.add(timeoutLabel,BorderLayout.WEST);
+		time.add(timeout,BorderLayout.CENTER);
+		
+		JSeparator s = new JSeparator();
+		
+		s.setOrientation(SwingConstants.VERTICAL);
+		
+		JPanel params = new JPanel(); 
+		params.add(modifyRequests );
+		params.add(s);
+		params.add( time );
+		
+		JSplitPane headerBar = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,getPayload,params);
+		headerBar.setDividerLocation(0.5);
+		headerBar.setResizeWeight(0.5);
+		
+		
 		JScrollPane scroll = new JScrollPane (code, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		
 		getPayload.addActionListener(new ActionListener() {
@@ -98,7 +133,7 @@ public class KollaboratorModule implements BurpExtension{
 			}	
 		});
 		
-		JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,getPayload, scroll);
+		JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,headerBar, scroll);
 		
 		return splitPane;
 		
