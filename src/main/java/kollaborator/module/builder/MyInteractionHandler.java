@@ -22,12 +22,16 @@ public class MyInteractionHandler{
     
 	
 	private final MontoyaApi api;
-    private final InteractionLogger interactionLogger;
+    	private final InteractionLogger interactionLogger;
+	static boolean otpSet;
+	static String otp;
 
     public MyInteractionHandler(MontoyaApi api, InteractionLogger interactionLogger)
     {
         this.api = api;
         this.interactionLogger = interactionLogger;
+	otpSet = false;
+        otp = "";
     }
     
     
@@ -240,9 +244,17 @@ public class MyInteractionHandler{
     		BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
     		
     		String line;
+		String extracted;
     		while ((line = reader.readLine()) != null) {
-    		    api.logging().logToOutput(line);
-    		}
+			api.logging().logToOutput(line);
+			// IF you want OTP to be replaced in any request , In order to tell the extension what is 
+			// OTP, you need to make a print statement like print("__extracted__" + otp)
+			if(line.matches("__extracted__(.*)")) { 
+				extracted = line.replace("__extracted__", ""); 
+				this.otp = extracted;
+				this.otpSet = true;
+			}		 
+		}
     		reader.close();
     		script.delete();
 		} catch (IOException e) {
