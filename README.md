@@ -47,6 +47,8 @@ Here are the 20 placeholders you can use:
 
 Please note that some of the interaction data is base64 encoded, for example `__httpRequestBodyB64__`,  and needs to be decoded before being used in your script.
 
+Also note that the word `__extracted__` is also being reserved and should not be used as python variable or in python scripts. 
+
 ## Working
 
 Basic functionality of extension like polling is being used via the Burp Montoya API example. 
@@ -61,7 +63,7 @@ Apart from that UI is added to provide user textarea and buton to copy collabora
 
 ## Future plans
 
-- Add ability to create/manage session identifiers(assist in creating session which are created via email OTPs).
+- Add ability to create/manage session identifiers(assist in creating session which are created via email OTPs).(Branch - SMTP-Interaction-builder).
 
 ## Contribution
 If you'd like to contribute to this project, please feel free to fork the repository and submit a pull request!
