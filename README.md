@@ -11,7 +11,7 @@ Also, please note that this extension utilizes the python and library installed 
 ## Usage
 You can write your Python script in the text area under the KMB tab. This script will be triggered once an interaction is received by the collaborator. 
 
-## Steps
+## Steps (without OTP processing)
 
 - Write the python script
 - Click on "Copy Payload".
@@ -57,9 +57,15 @@ Code for interaction have been edited to
 - Replace placeholders with actual Data( base64 encoded in case data is not reliable).
 - Store the the script data in temp python file.
 - Use process.exec to call python and run the script file.
+- Then check for the output of python file, If output of python contains `__extracted__`, then extract otp, set otp to variable, set the `otpflag` to true.
+- In parallel, another class is responsible for checking if the `Modify Request` is enabled. 
+- If enabled, then check each request body for `__extracted__` value. 
+- If present, then check if `otpflag` is set to true. In case `otpflag` is false, wait for `timeout` seconds. 
+- If `otpflag` becomes true within that limit, then perform below step. If `otpflag` does not become true within specified `timeout`, then process the request without otp.
+- If `otpflag` is set to true, it implies that otp was set by the interaction handler and otp is ready to use. In this case `__extracted__` in request body is replaced with the otp set by interaction handler and request is dispatched. 
 - delete the file after running.
 
-Apart from that UI is added to provide user textarea and buton to copy collaborator link. 
+Apart from that UI is added to provide user textarea for python script, checkbox to specify if all requests should be processed to add otp, input field to specify timeout and buton to copy collaborator link. 
 
 ## Changes done
 
@@ -79,6 +85,10 @@ Apart from that UI is added to provide user textarea and buton to copy collabora
 - Write a python script to parse the smtp interction and extract the OTP from SMTP interaction
 - Print into console in format    `__extracted__OTP` where `OTP` is the OTP extracted from SMTP interaction
 - Now, whenever request is passed through Burp with  `__extracted__` in request body, it will be intercepted by the extension and then extension will wait till timeout foe the SMTP interaction. If extension received interaction, then OTP will be extracted and replaced in request body wherever `__extracted__` is present.
+
+## Known Issue
+
+http2 request causes some issued with `Modify Requests` function. Hence, it should be used with HTTP/1.1 requests only.
 
 
 ## Contribution
