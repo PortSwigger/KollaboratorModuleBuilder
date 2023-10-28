@@ -239,10 +239,26 @@ public class MyInteractionHandler{
     		
     		BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
     		
+    		BufferedReader error = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+    		
     		String line;
-    		while ((line = reader.readLine()) != null) {
-    		    api.logging().logToOutput(line);
-    		}
+    		String extracted;
+    		String err;
+    		while ((line = reader.readLine()) != null  || (err = error.readLine()) != null ) {
+          if((line = reader.readLine()) != null) {
+            api.logging().logToOutput(line);
+            // IF you want OTP to be replaced in any request , In order to tell the extension what is 
+            // OTP, you need to make a print statement like print("__extracted__" + otp)
+            if(line.matches("__extracted__(.*)")) { 
+              extracted = line.replace("__extracted__", ""); 
+              this.otp = extracted;
+              this.otpSet = true;
+            }
+          }
+          if((err = error.readLine()) != null ) {
+            api.logging().logToError(err);
+          }
+		}
     		reader.close();
     		script.delete();
 		} catch (IOException e) {
