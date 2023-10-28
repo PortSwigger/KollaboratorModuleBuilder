@@ -14,9 +14,12 @@ You can write your Python script in the text area under the KMB tab. This script
 ## Steps (without OTP processing)
 
 - Write the python script
+ ![](https://raw.githubusercontent.com/mbkunal/KollaboratorModuleBuilder/main/screenshot1.1.png "")
 - Click on "Copy Payload".
 - Make interaction with the the collaborator link copied.
+ ![](https://raw.githubusercontent.com/mbkunal/KollaboratorModuleBuilder/main/screenshot1.2.png "")
 - Observe that the the python script is executed.
+![](https://raw.githubusercontent.com/mbkunal/KollaboratorModuleBuilder/main/screenshot1.3.png "")
 
 Note: python output is being redirected to extension's output. 
 
