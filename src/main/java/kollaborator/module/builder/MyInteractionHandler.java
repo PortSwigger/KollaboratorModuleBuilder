@@ -22,16 +22,12 @@ public class MyInteractionHandler{
     
 	
 	private final MontoyaApi api;
-    	private final InteractionLogger interactionLogger;
-	static boolean otpSet;
-	static String otp;
+    private final InteractionLogger interactionLogger;
 
     public MyInteractionHandler(MontoyaApi api, InteractionLogger interactionLogger)
     {
         this.api = api;
         this.interactionLogger = interactionLogger;
-	otpSet = false;
-        otp = "";
     }
     
     
@@ -249,19 +245,19 @@ public class MyInteractionHandler{
     		String extracted;
     		String err;
     		while ((line = reader.readLine()) != null  || (err = error.readLine()) != null ) {
-			if((line = reader.readLine()) != null) {
-				api.logging().logToOutput(line);
-				// IF you want OTP to be replaced in any request , In order to tell the extension what is 
-				// OTP, you need to make a print statement like print("__extracted__" + otp)
-				if(line.matches("__extracted__(.*)")) { 
-					extracted = line.replace("__extracted__", ""); 
-					this.otp = extracted;
-					this.otpSet = true;
-				}
-			}
-			if((err = error.readLine()) != null ) {
-				api.logging().logToError(err);
-			}
+          if((line = reader.readLine()) != null) {
+            api.logging().logToOutput(line);
+            // IF you want OTP to be replaced in any request , In order to tell the extension what is 
+            // OTP, you need to make a print statement like print("__extracted__" + otp)
+            if(line.matches("__extracted__(.*)")) { 
+              extracted = line.replace("__extracted__", ""); 
+              this.otp = extracted;
+              this.otpSet = true;
+            }
+          }
+          if((err = error.readLine()) != null ) {
+            api.logging().logToError(err);
+          }
 		}
     		reader.close();
     		script.delete();
