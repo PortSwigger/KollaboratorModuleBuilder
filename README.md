@@ -61,9 +61,23 @@ Code for interaction have been edited to
 
 Apart from that UI is added to provide user textarea and buton to copy collaborator link. 
 
-## Future plans
+## Chnages done
 
-- Add ability to create/manage session identifiers(assist in creating session which are created via email OTPs).(Branch - SMTP-Interaction-builder).
+- Added ability to create/manage session identifiers(assist in creating session which are created via email OTPs).
+
+### How to replace OTP in requests
+
+#### Prerequisites 
+User shouls be able to register an account with collaborator link as email address. For example (admin@collaborator.oastify.com)
+
+#### Steps
+
+- Copy the collaborator link from the KMB tab. This link will be used to register the user account, like abcd@collaborator.oastify.com
+- Register an account with copied collaborator link.
+- Write a python script to parse the smtp interction and extract the OTP from SMTP interaction
+- Print into console in format    `__extracted__OTP` where OTP is the OTP extracted from SMTP interaction
+- Now, whenever request is passed through Burp with  
+
 
 ## Contribution
 If you'd like to contribute to this project, please feel free to fork the repository and submit a pull request!
