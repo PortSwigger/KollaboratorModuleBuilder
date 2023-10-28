@@ -65,18 +65,20 @@ Apart from that UI is added to provide user textarea and buton to copy collabora
 
  Added ability to create/manage session identifiers(assist in creating session which are created via email OTPs).
 
-- How to replace OTP in requests
+## How to replace OTP in requests
 
---Prerequisites 
----User shouls be able to register an account with collaborator link as email address. For example (admin@collaborator.oastify.com)
+### Prerequisites 
+- User shouls be able to register an account with collaborator link as email address. For example (admin@collaborator.oastify.com)
+- Check the "Modify Requests" checkbox under "KMB" tab
+- Set the timeout to appropriate value under "KMB" tab.
 
--- Steps
+### Steps
 
---- Copy the collaborator link from the KMB tab. This link will be used to register the user account, like abcd@collaborator.oastify.com
---- Register an account with copied collaborator link.
---- Write a python script to parse the smtp interction and extract the OTP from SMTP interaction
---- Print into console in format    `__extracted__OTP` where OTP is the OTP extracted from SMTP interaction
---- Now, whenever request is passed through Burp with  
+- Copy the collaborator link from the KMB tab. This link will be used to register the user account, like abcd@collaborator.oastify.com
+- Register an account with copied collaborator link.
+- Write a python script to parse the smtp interction and extract the OTP from SMTP interaction
+- Print into console in format    `__extracted__OTP` where `OTP` is the OTP extracted from SMTP interaction
+- Now, whenever request is passed through Burp with  `__extracted__` in request body, it will be intercepted by the extension and then extension will wait till timeout foe the SMTP interaction. If extension received interaction, then OTP will be extracted and replaced in request body wherever `__extracted__` is present.
 
 
 ## Contribution
