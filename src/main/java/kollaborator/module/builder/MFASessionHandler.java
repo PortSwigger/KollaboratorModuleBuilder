@@ -22,7 +22,6 @@ public class MFASessionHandler implements HttpHandler {
     public MFASessionHandler(MontoyaApi api) {
         this.logging = api.logging();
         
-        
     }
 	
 	@Override

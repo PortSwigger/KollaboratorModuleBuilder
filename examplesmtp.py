@@ -10,7 +10,4 @@ if("__interactionType__" == "SMTP"):
         #print(str(reg.match(line)) + line) 
         if reg.match(line): 
             otp = reg.search(line) 
-            print( "otp = " + str(otp.group(1)))
-            #############################################################
-            ##   write code to use the otp or extracted message data  ##
-            #############################################################
+            print("__extracted__"+otp.group(1))

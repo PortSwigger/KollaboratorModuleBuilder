@@ -99,10 +99,8 @@ public class KollaboratorModule implements BurpExtension{
 		modifyRequests = new JCheckBox("Modify Requests");
 		timeout = new JTextField("5");
 		code = new JTextArea();
-		
 		JLabel timeoutLabel = new JLabel("    TimeOut (in seconds) ");
 		timeoutLabel.setLabelFor(timeout);
-		
 		JPanel time = new JPanel(new BorderLayout());
 		
 		time.add(timeoutLabel,BorderLayout.WEST);

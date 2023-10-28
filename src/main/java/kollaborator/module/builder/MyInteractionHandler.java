@@ -230,7 +230,6 @@ public class MyInteractionHandler{
     	
     	String tempDir  = System.getProperty("java.io.tmpdir");
     	
-    	
     	try {
     		File script = new File(tempDir + File.separator +"script.py");
     		script.createNewFile();
