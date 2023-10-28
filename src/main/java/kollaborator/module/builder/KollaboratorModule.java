@@ -97,7 +97,7 @@ public class KollaboratorModule implements BurpExtension{
 	private Component createTab(CollaboratorClient collaboratorClient) {
 		JButton getPayload = new JButton("Copy payload!"); 
 		modifyRequests = new JCheckBox("Modify Requests");
-		timeout = new JTextField("5");
+		timeout = new JTextField("5",3);
 		code = new JTextArea();
 		JLabel timeoutLabel = new JLabel("    TimeOut (in seconds) ");
 		timeoutLabel.setLabelFor(timeout);
