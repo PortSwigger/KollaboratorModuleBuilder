@@ -82,7 +82,7 @@ public class KollaboratorModule implements BurpExtension{
 		Frame frame = api.userInterface().swingUtils().suiteFrame();
 		
 		try {
-			Process process = Runtime.getRuntime().exec("python3 -V");
+			Process process = Runtime.getRuntime().exec("python -V");
 			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 			BufferedReader error = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 			
