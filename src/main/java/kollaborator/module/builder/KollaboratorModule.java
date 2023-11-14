@@ -6,20 +6,27 @@ import burp.api.montoya.collaborator.CollaboratorClient;
 import burp.api.montoya.collaborator.SecretKey;
 import burp.api.montoya.core.Registration;
 import burp.api.montoya.persistence.PersistedObject;
+import burp.api.montoya.ui.swing.SwingUtils;
 import kollaborator.module.builder.poller.Poller;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Frame;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.time.Duration;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
@@ -43,7 +50,8 @@ public class KollaboratorModule implements BurpExtension{
         api.http().registerHttpHandler(new MFASessionHandler(api));
         
         
-
+        pythonCheck();
+        
         CollaboratorClient collaboratorClient = createCollaboratorClient(api.persistence().extensionData());
 
         InteractionLogger interactionLogger = new InteractionLogger(api);
@@ -70,6 +78,38 @@ public class KollaboratorModule implements BurpExtension{
 		
 	}
 	
+	private void pythonCheck() {
+		Frame frame = api.userInterface().swingUtils().suiteFrame();
+		
+		try {
+			Process process = Runtime.getRuntime().exec("python3 -V");
+			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+			BufferedReader error = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+			
+			String line = null;
+    		String err = null;
+			
+    		line = reader.readLine();
+    		err = error.readLine();
+    		
+			if(line != null) {
+				return;
+			}else {
+				JOptionPane.showMessageDialog(frame,
+					    "This Burp extension requires Pyhton to be installed on your system and should be accessible via \"python\" command.\nPlease make sure that the python is at user's PATH. \nIn case you believe This is an error, Please log a new issue at \"https://github.com/mbkunal/KollaboratorModuleBuilder/issues\"\n\n\nCommon errors: python accessible via alias like python3 or python2 will also result in error.\nSimply run \"python\" on command line and verify if python is available",
+					    "Python Error",
+					    JOptionPane.PLAIN_MESSAGE);
+			}
+			reader.close();
+			error.close();
+			
+		} catch (IOException e) {
+			api.logging().logToError(e.getMessage());
+			e.printStackTrace();
+		}
+		
+	}
+
 	private CollaboratorClient createCollaboratorClient(PersistedObject persistedData)
     {
         CollaboratorClient collaboratorClient;

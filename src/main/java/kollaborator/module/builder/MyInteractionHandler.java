@@ -263,9 +263,11 @@ public class MyInteractionHandler{
 			}
 		}
     		reader.close();
+    		error.close();
     		script.delete();
 		} catch (IOException e) {
 			e.printStackTrace();
+			api.logging().logToError(e.getMessage());
 		}
     }
 
