@@ -1,0 +1,13 @@
+Uuid: 59af158b21cb46c9a36612ab98602cbd
+ExtensionType: 1
+Name: Kollaborator Module Builder
+RepoName: kollaborator-module-builder
+ScreenVersion: 0.0.1
+SerialVersion: 1
+MinPlatformVersion: 8
+ProOnly: True
+Author: mbkunal
+ShortDescription: Allows you to write your own Python script to handle collaborator interactions. 
+EntryPoint: target/kollaborator.module.builder-0.0.1-SNAPSHOT-jar-with-dependencies.jar
+BuildCommand: mvn package -DskipTests=true -Dmaven.javadoc.skip=true -B
+SupportedProducts: Pro
